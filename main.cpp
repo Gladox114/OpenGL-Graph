@@ -14,7 +14,8 @@
 #include <vector>
 
 
-
+int currentWindow = 0;
+int tickrate = 20;
 
 int main() {
     // -- read config file --
@@ -50,22 +51,24 @@ int main() {
     (repeats every <inser time>)
         window1
         window3
-    */
+    *///
 
-    glfwMakeContextCurrent(WindowObjs[0]->m_Window);
+
     while (!glfwWindowShouldClose(WindowObjs[0]->m_Window)) {
-        // rendering commands
-        // ------------------
-        glClearColor(0.2f,0.2f,0.2f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        glfwSwapBuffers(WindowObjs[0]->m_Window);
-        glfwPollEvents();
+        // render the focused window
+        for (int i = 0; i<tickrate; i++) {
+            glfwMakeContextCurrent(WindowObjs[currentWindow]->m_Window);
+            WindowObjs[currentWindow]->run();
+        }
+        
+        // render the rest of the windows 
+        for (int i = 0; i<WindowObjs.size();i++) {
+            if (i != currentWindow) {
+                glfwMakeContextCurrent(WindowObjs[i]->m_Window);
+                WindowObjs[i]->run();
+            }
+        }
     }
-
     
     printf("test\n");
 }
@@ -76,6 +79,7 @@ void OGLS::window_focus_callback(GLFWwindow* window, int focused) {
     if (focused)
     {
         std::cout << "a window got focused " << WindowObj->m_ID << std::endl;
+        currentWindow = WindowObj->m_ID;
     }
     else
     {

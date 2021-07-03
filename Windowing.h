@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
@@ -15,6 +15,8 @@ class PlotData;
 |----PlotData1
 */
 namespace Windowing {
+
+
     class WindowData {
 
         public:
@@ -23,6 +25,7 @@ namespace Windowing {
             unsigned int* VAO; // vertex array
             unsigned int* VBO; // vertex buffer 
             int m_ID;
+
             WindowData( int width,
                         int height,
                         const char* title,
@@ -39,6 +42,22 @@ namespace Windowing {
             ~WindowData()
             {
                 glfwDestroyWindow(m_Window);
+            }
+            void run() {
+                // rendering commands
+                // ------------------
+                glClearColor(0.2f,0.2f,0.2f,1.0f);
+                glClear(GL_COLOR_BUFFER_BIT);
+
+                mainFunction();
+                // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+                // -------------------------------------------------------------------------------
+                glfwSwapBuffers(m_Window);
+                glfwPollEvents();
+
+            }
+            void mainFunction() {
+                std::cout << "I am " << m_ID << std::endl;
             }
     };
 
