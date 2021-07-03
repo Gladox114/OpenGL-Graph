@@ -16,6 +16,8 @@ class PlotData;
 */
 namespace Windowing {
 
+    class WindowData;
+    void defaultFunc(WindowData window);
 
     class WindowData {
 
@@ -24,18 +26,17 @@ namespace Windowing {
             GraphBody* graphBody; // the graphBody ID
             unsigned int* VAO; // vertex array
             unsigned int* VBO; // vertex buffer 
-            int m_ID;
-
+            int m_ID = 0;
+            void (*mainFunction)(WindowData*);
             WindowData( int width,
                         int height,
                         const char* title,
                         GLFWmonitor* monitor,
-                        GLFWwindow* share, 
-                        int m_ID) : m_ID(m_ID)
+                        GLFWwindow* share)
             {   
                 // create window and store the ID in the class
                 m_Window = glfwCreateWindow(width, height, title, monitor, share);
-                // in GLFW you can have for the current window a pointer. Let's point it's own class to it
+                // in GLFW you can have for the current m_Window a pointer. Let's point it's own class to it
                 glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
             }
             // on destroying the class destroy the window also
@@ -49,16 +50,15 @@ namespace Windowing {
                 glClearColor(0.2f,0.2f,0.2f,1.0f);
                 glClear(GL_COLOR_BUFFER_BIT);
 
-                mainFunction();
+                mainFunction((this));
                 // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
                 // -------------------------------------------------------------------------------
                 glfwSwapBuffers(m_Window);
                 glfwPollEvents();
 
             }
-            void mainFunction() {
-                std::cout << "I am " << m_ID << std::endl;
-            }
     };
+
+
 
 }

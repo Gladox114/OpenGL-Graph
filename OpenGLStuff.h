@@ -44,23 +44,31 @@ namespace OGLS {
         }
         return 0;
     }
+    
+    std::string getConfVal(std::string string,int x) {
+        string.append(std::to_string(x+1));
+        return string;
+    }
 
+    void defaultFunc(Windowing::WindowData window) {
+        std::cout << "I am " << window.m_ID << std::endl;
+    }
 
     void spawnWindows(std::vector<Windowing::WindowData*> &Windows,int amountOfWindows, cppsecrets::ConfigReader* p){
         for (int i = 0; i<amountOfWindows; i++) {
             // create variables
             int width;
             int height;
-            // create a string with the number like width1 and width2 to find the right config variable
-            std::string widthS = "width";
-            std::string heightS = "height";
-            widthS.append(std::to_string(i+1));
-            heightS.append(std::to_string(i+1));
             // read the config file
-            p->getValue(widthS,width);
-            p->getValue(heightS,height);
+            p->getValue(getConfVal("width",i),width);
+            p->getValue(getConfVal("height",i),height);
             // create that window
-            Windows.push_back(new Windowing::WindowData(width,height,"test",NULL,NULL,i));
+            Windows.push_back(new Windowing::WindowData(width,height,"test",NULL,NULL));
+            // change some configs
+            Windows[i]->m_ID = i;
+              
+            Windows[i]->mainFunction = defaultFunc; // for testing and lazyness just apply the default function
+            
             // check if the window works and make it current
             if (OGLS::checkWindow(Windows[i]->m_Window)) exit(1);
             glfwSetWindowFocusCallback(Windows[i]->m_Window, OGLS::window_focus_callback);

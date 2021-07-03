@@ -2,15 +2,27 @@ amountOfWindows = 5
 
 width1 = 200
 height1 = 200
+x1 = 100
+y1 = 100
+
 
 width2 = 300
 height2 = 300
+x2 = 100
+y2 = 100
 
 width3 = 300
 height3 = 300
+x3 = 100
+y3 = 100
+
 
 width4 = 300
 height4 = 300
+x4 = 100
+y4 = 100
 
 width5 = 300
 height5 = 300
+x5 = 100
+y5 = 100
