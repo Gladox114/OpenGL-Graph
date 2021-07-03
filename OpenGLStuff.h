@@ -46,7 +46,7 @@ namespace OGLS {
     }
 
 
-    void spawnWindows(std::vector<Windowing::WindowData*> Windows,int amountOfWindows, cppsecrets::ConfigReader* p){
+    void spawnWindows(std::vector<Windowing::WindowData*> &Windows,int amountOfWindows, cppsecrets::ConfigReader* p){
         for (int i = 0; i<amountOfWindows; i++) {
             // create variables
             int width;
@@ -60,9 +60,10 @@ namespace OGLS {
             p->getValue(widthS,width);
             p->getValue(heightS,height);
             // create that window
-            Windows.push_back(new Windowing::WindowData(width,height,"test",NULL,NULL));
+            Windows.push_back(new Windowing::WindowData(width,height,"test",NULL,NULL,i));
             // check if the window works and make it current
             if (OGLS::checkWindow(Windows[i]->m_Window)) exit(1);
+            glfwSetWindowFocusCallback(Windows[i]->m_Window, OGLS::window_focus_callback);
         }
     }
 }

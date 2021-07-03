@@ -2,7 +2,6 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
-
 class GraphBody;
 class WindowData;
 class PlotData;
@@ -23,12 +22,13 @@ namespace Windowing {
             GraphBody* graphBody; // the graphBody ID
             unsigned int* VAO; // vertex array
             unsigned int* VBO; // vertex buffer 
-
+            int m_ID;
             WindowData( int width,
                         int height,
                         const char* title,
                         GLFWmonitor* monitor,
-                        GLFWwindow* share) 
+                        GLFWwindow* share, 
+                        int m_ID) : m_ID(m_ID)
             {   
                 // create window and store the ID in the class
                 m_Window = glfwCreateWindow(width, height, title, monitor, share);
