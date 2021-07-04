@@ -50,7 +50,7 @@ int main() {
     /*
     (repeats every tick)
         Window2 (focused)
-    (repeats every <inser time>)
+    (repeats every <insert time>)
         window1
         window3
     *///

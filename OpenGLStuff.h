@@ -66,7 +66,6 @@ namespace OGLS {
             Windows.push_back(new Windowing::WindowData(width,height,"test",NULL,NULL));
             // change some configs
             Windows[i]->m_ID = i;
-              
             Windows[i]->mainFunction = defaultFunc; // for testing and lazyness just apply the default function
             
             // check if the window works and make it current
