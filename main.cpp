@@ -1,7 +1,6 @@
 
 #include "OpenGLStuff.h"
 #include "configReadTest.h"
-#include "libraryLoader.h"
 
 #include <iostream>
 #include "glad/glad.h"
@@ -18,6 +17,7 @@ int currentWindow = 0;
 int tickrate = 20;
 
 int main() {
+    system("cd ./functions && ./compileSO.sh");
     // -- read config file --
     // ----------------------
     // Create object of the class ConfigReader
@@ -44,10 +44,7 @@ int main() {
     // init GLAD
     if (OGLS::initGlad()) exit(1);
 
-    
-    libLoader::custom_func test = libLoader::loadFunc("./functions/test1.so","mainFunc");
-
-    test(WindowObjs[0]);
+    OGLS::attachFunctions(WindowObjs,amountOfWindows,p);
 
     /*
     (repeats every tick)

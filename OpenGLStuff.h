@@ -1,5 +1,8 @@
+#ifndef OPENGLSTUFF_H
+#define OPENGLSTUFF_H
 #include "Windowing.h"
 #include "configReadTest.h"
+#include "libraryLoader.h"
 
 #include <iostream>
 #include "glad/glad.h"
@@ -53,24 +56,42 @@ namespace OGLS {
     void defaultFunc(Windowing::WindowData* window) {
         //std::cout << "I am " << window->m_ID << std::endl;
     }
+    
 
     void spawnWindows(std::vector<Windowing::WindowData*> &Windows,int amountOfWindows, cppsecrets::ConfigReader* p){
         for (int i = 0; i<amountOfWindows; i++) {
             // create variables
             int width;
             int height;
+
             // read the config file
             p->getValue(getConfVal("width",i),width);
             p->getValue(getConfVal("height",i),height);
+
             // create that window
             Windows.push_back(new Windowing::WindowData(width,height,"test",NULL,NULL));
             // change some configs
             Windows[i]->m_ID = i;
-            Windows[i]->mainFunction = defaultFunc; // for testing and lazyness just apply the default function
-            
+
             // check if the window works and make it current
             if (OGLS::checkWindow(Windows[i]->m_Window)) exit(1);
             glfwSetWindowFocusCallback(Windows[i]->m_Window, OGLS::window_focus_callback);
         }
     }
+
+    void attachFunctions(std::vector<Windowing::WindowData*> &Windows,int amountOfWindows, cppsecrets::ConfigReader* p){
+        for (int i = 0; i<amountOfWindows; i++) {
+            std::string libName;
+            std::string funcName;
+            p->getValue(getConfVal("libName",i),libName);
+            p->getValue(getConfVal("funcName",i),funcName);
+            if (libName.empty() || funcName.empty())
+                Windows[i]->mainFunction = defaultFunc; // to at least have a function apply the default function
+            else
+                // append to the location the libName and then the file ending .so to get the full location. Also convert them to char*
+                Windows[i]->mainFunction = libLoader::loadFunc(std::string("./functions/").append(libName.append(".so")).c_str(), funcName.c_str());
+        }
+    }
+
 }
+#endif

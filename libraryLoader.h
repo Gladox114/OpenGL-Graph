@@ -6,7 +6,7 @@
 #include <dlfcn.h>
 
 namespace libLoader {
-    typedef int (*custom_func)(Windowing::WindowData*);
+    typedef void (*custom_func)(Windowing::WindowData*);
 
     custom_func loadFunc(const char* location,const char* functionName) {
         void* function = dlopen(location,RTLD_LAZY);

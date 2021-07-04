@@ -4,7 +4,8 @@ width1 = 200
 height1 = 200
 x1 = 100
 y1 = 100
-
+libName1 = test1
+funcName1 = mainFunc
 
 width2 = 300
 height2 = 300
