@@ -1,7 +1,7 @@
 
 #include "OpenGLStuff.h"
-
 #include "configReadTest.h"
+#include "libraryLoader.h"
 
 #include <iostream>
 #include "glad/glad.h"
@@ -44,8 +44,10 @@ int main() {
     // init GLAD
     if (OGLS::initGlad()) exit(1);
 
+    
+    libLoader::custom_func test = libLoader::loadFunc("./functions/test1.so","mainFunc");
 
- 
+    test(WindowObjs[0]);
 
     /*
     (repeats every tick)

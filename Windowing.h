@@ -1,3 +1,5 @@
+#ifndef WINDOWING_H
+#define WINDOWING_H
 #include <iostream>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
@@ -59,3 +61,4 @@ namespace Windowing {
 
 
 }
+#endif
