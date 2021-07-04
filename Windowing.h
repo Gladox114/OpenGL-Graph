@@ -16,9 +16,6 @@ class PlotData;
 */
 namespace Windowing {
 
-    class WindowData;
-    void defaultFunc(WindowData window);
-
     class WindowData {
 
         public:

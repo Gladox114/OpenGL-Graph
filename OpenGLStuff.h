@@ -50,8 +50,8 @@ namespace OGLS {
         return string;
     }
 
-    void defaultFunc(Windowing::WindowData window) {
-        std::cout << "I am " << window.m_ID << std::endl;
+    void defaultFunc(Windowing::WindowData* window) {
+        std::cout << "I am " << window->m_ID << std::endl;
     }
 
     void spawnWindows(std::vector<Windowing::WindowData*> &Windows,int amountOfWindows, cppsecrets::ConfigReader* p){
