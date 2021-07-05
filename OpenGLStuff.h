@@ -87,9 +87,16 @@ namespace OGLS {
             p->getValue(getConfVal("funcName",i),funcName);
             if (libName.empty() || funcName.empty())
                 Windows[i]->mainFunction = defaultFunc; // to at least have a function apply the default function
-            else
+            else {
+                // load the library.so
                 // append to the location the libName and then the file ending .so to get the full location. Also convert them to char*
-                Windows[i]->mainFunction = libLoader::loadFunc(std::string("./functions/").append(libName.append(".so")).c_str(), funcName.c_str());
+                void* library = libLoader::loadLib(std::string("./functions/").append(libName.append(".so")).c_str());
+                // grab the init function and execute it
+                libLoader::init_func init = (libLoader::init_func) libLoader::loadFunc(library, "init");
+                printf("test: %i \n",init());
+                // grab the main function and save it to the window
+                Windows[i]->mainFunction = libLoader::loadFunc(library, funcName.c_str());
+            }
         }
     }
 

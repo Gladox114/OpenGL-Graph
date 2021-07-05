@@ -46,8 +46,8 @@ namespace Windowing {
             void run() {
                 // rendering commands
                 // ------------------
-                glClearColor(0.2f,0.2f,0.2f,1.0f);
-                glClear(GL_COLOR_BUFFER_BIT);
+                //glClearColor(0.2f,0.2f,0.2f,1.0f);
+                //glClear(GL_COLOR_BUFFER_BIT);
 
                 mainFunction((this));
                 // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
