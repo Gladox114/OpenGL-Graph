@@ -54,7 +54,15 @@ namespace OGLS {
     }
 
     void defaultFunc(Windowing::WindowData* window) {
-        //std::cout << "I am " << window->m_ID << std::endl;
+        // rendering commands
+        // ------------------
+        //glClearColor(0.2f,0.2f,0.2f,1.0f);
+        //glClear(GL_COLOR_BUFFER_BIT);
+        std::cout << "I am " << window->m_ID << " " << window->m_Window << std::endl;
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // -------------------------------------------------------------------------------        
+        glfwSwapBuffers(window->m_Window);
+        glfwPollEvents();
     }
     
 
@@ -93,7 +101,7 @@ namespace OGLS {
                 void* library = libLoader::loadLib(std::string("./functions/").append(libName.append(".so")).c_str());
                 // grab the init function and execute it
                 libLoader::init_func init = (libLoader::init_func) libLoader::loadFunc(library, "init");
-                printf("test: %i \n",init());
+                printf("test: %i \n",init(Windows[i]));
                 // grab the main function and save it to the window
                 Windows[i]->mainFunction = libLoader::loadFunc(library, funcName.c_str());
             }

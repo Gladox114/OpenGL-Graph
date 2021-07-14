@@ -6,7 +6,7 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <math.h>
-#include "shader_s.h"
+//#include "shader_s.h"
 #include <array>
 #include <ctime>
 #include <chrono>
@@ -54,17 +54,19 @@ int main() {
         window3
     *///
 
-
+    
     while (!glfwWindowShouldClose(WindowObjs[0]->m_Window)) {
         // render the focused window
+        //glfwMakeContextCurrent(NULL);
+        glfwMakeContextCurrent(WindowObjs[currentWindow]->m_Window);
         for (int i = 0; i<tickrate; i++) {
-            glfwMakeContextCurrent(WindowObjs[currentWindow]->m_Window);
             WindowObjs[currentWindow]->run();
         }
         
         // render the rest of the windows 
         for (int i = 0; i<WindowObjs.size();i++) {
             if (i != currentWindow) {
+                //glfwMakeContextCurrent(NULL);
                 glfwMakeContextCurrent(WindowObjs[i]->m_Window);
                 WindowObjs[i]->run();
             }

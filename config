@@ -1,10 +1,10 @@
-amountOfWindows = 5
+amountOfWindows = 2
 
-width1 = 200
-height1 = 200
+width1 = 600
+height1 = 600
 x1 = 100
 y1 = 100
-libName1 = test1
+libName1 = test2
 funcName1 = mainFunc
 
 width2 = 300

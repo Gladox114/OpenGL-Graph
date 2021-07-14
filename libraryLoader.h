@@ -7,7 +7,7 @@
 
 namespace libLoader {
     typedef void (*custom_func)(Windowing::WindowData*);
-    typedef int (*init_func)();
+    typedef int (*init_func)(Windowing::WindowData*);
 
     void* loadLib(const char* location) {
         void* library = dlopen(location,RTLD_LAZY);

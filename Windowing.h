@@ -22,7 +22,7 @@ namespace Windowing {
 
         public:
             GLFWwindow* m_Window; // the window ID
-            GraphBody* graphBody; // the graphBody ID
+            void* dataPointer; // the graphBody ID
             unsigned int* VAO; // vertex array
             unsigned int* VBO; // vertex buffer 
             int m_ID = 0;
@@ -52,8 +52,8 @@ namespace Windowing {
                 mainFunction((this));
                 // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
                 // -------------------------------------------------------------------------------
-                glfwSwapBuffers(m_Window);
-                glfwPollEvents();
+                //glfwSwapBuffers(m_Window);
+                //glfwPollEvents();
 
             }
     };

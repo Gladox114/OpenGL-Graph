@@ -33,7 +33,7 @@
 		"type": "shell",
 		"label": "g++ build active file",
 		"command": "/usr/bin/g++",
-		"args": ["-g", "${file}", "${fileDirname}/glad.c", "${fileDirname}/configReadTest.cpp",
+		"args": ["-g", "${file}", "${fileDirname}/../glad.c", "${fileDirname}/../configReadTest.cpp",
 			"-o", "${fileDirname}/${fileBasenameNoExtension}",
 			"-lglfw",  "-lGL",  "-lm", "-lX11", "-lpthread", "-lXi", "-lXrandr", "-ldl", "-lfreetype"],
 		"options": {
