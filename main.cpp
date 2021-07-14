@@ -17,6 +17,7 @@ int currentWindow = 0;
 int tickrate = 20;
 
 int main() {
+    // compile the libraries
     system("cd ./functions && ./compileSO.sh");
     // -- read config file --
     // ----------------------
@@ -44,6 +45,7 @@ int main() {
     // init GLAD
     if (OGLS::initGlad()) exit(1);
 
+    // load and save the Libraries into the window Objects
     OGLS::attachFunctions(WindowObjs,amountOfWindows,p);
 
     /*
@@ -74,6 +76,7 @@ int main() {
     }
 }
 
+// gets executed when the focus of the windows changes
 void OGLS::window_focus_callback(GLFWwindow* window, int focused) {
     // get the class of the current window
     Windowing::WindowData* WindowObj = reinterpret_cast<Windowing::WindowData*>(glfwGetWindowUserPointer(window));
