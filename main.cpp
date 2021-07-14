@@ -72,8 +72,6 @@ int main() {
             }
         }
     }
-    
-    printf("test\n");
 }
 
 void OGLS::window_focus_callback(GLFWwindow* window, int focused) {
